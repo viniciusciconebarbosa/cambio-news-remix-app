@@ -9,16 +9,41 @@ import { DollarSign } from "lucide-react";
 import FinancialNews from "../components/FinancialNews";
 import CryptoInfo from "../components/CryptoInfo";
 
+type Noticia = {
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+  publishedAt: string;
+  source: {
+    name: string;
+  };
+};
+
+type LoaderData = {
+  articles: Noticia[];
+};
+
 export const loader: LoaderFunction = async () => {
-  return json({
-    EXCHANGE_RATE_API_KEY: process.env.EXCHANGE_RATE_API_KEY,
-    NEWS_API_KEY: process.env.NEWS_API_KEY,
-    ALPHA_VANTAGE_KEY: process.env.ALPHA_VANTAGE_KEY,
-  });
+  try {
+    const response = await fetch(
+      `https://gnews.io/api/v4/search?q=economia&lang=pt&max=6&apikey=${process.env.GNEWS_API_KEY}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Erro na API: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return json(data);
+  } catch (error) {
+    console.error("Erro ao buscar notícias:", error);
+    return json({ articles: [] });
+  }
 };
 
 export default function Index() {
-  const { EXCHANGE_RATE_API_KEY, NEWS_API_KEY, ALPHA_VANTAGE_KEY } = useLoaderData<typeof loader>();
+  const { articles } = useLoaderData<LoaderData>();
 
   return (
     <ThemeProvider>
@@ -38,19 +63,18 @@ export default function Index() {
           
           <div className="flex flex-col space-y-6">
             <main className="flex flex-col items-center justify-center py-6">
-              <CurrencyConverter exchangeRateApiKey={EXCHANGE_RATE_API_KEY} />
+              <CurrencyConverter />
             </main>
             
             <div className="flex flex-col items-center justify-center py-6">
-            <div className="w-[70%]">
+              <div className="w-[70%]">
                 <CryptoInfo />
               </div>
               <div className="w-[70%] mt-6">
-                <FinancialNews apiKey={NEWS_API_KEY} />
+                <FinancialNews />
               </div>
             </div>
           </div>
-     
 
           <footer className="mt-12 text-center text-sm text-gray-500 dark:text-gray-400">
             <p>
