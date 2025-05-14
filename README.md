@@ -2,6 +2,11 @@
 
 O Cambio News é uma aplicação web que fornece informações atualizadas sobre câmbio, notícias financeiras e análises de mercado. A aplicação permite aos usuários visualizar taxas de câmbio em tempo real, acompanhar notícias relevantes do mercado financeiro e obter análises detalhadas sobre tendências econômicas. Além disso, a aplicação oferece recursos de personalização.
 
+---
+## Dominio para a aplicaçao 
+https://cambio-news-remix-app.vercel.app/
+
+---
 ## Índice
 
 - [Cambio News](#cambio-news)
@@ -17,7 +22,6 @@ O Cambio News é uma aplicação web que fornece informações atualizadas sobre
   - [Licença](#licença)
   - [Referências](#referências)
 
----
 
 ## Visão Geral
 
