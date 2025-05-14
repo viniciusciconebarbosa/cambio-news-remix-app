@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-inter antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-manrope;
+  }
+}
+
+@layer components {
+  .currency-card {
+    @apply transition-all duration-300 ease-in-out hover:-translate-y-0.5;
+  }
+
+  .input-focus-ring {
+    @apply focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 focus:outline-none;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/15 backdrop-blur-lg;
+  }
+  
+  .dark .glass {
+    @apply bg-slate-900/30;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-br from-cyan-600 via-teal-600 to-teal-700;
+  }
+} 
